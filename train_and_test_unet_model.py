@@ -72,6 +72,8 @@ for subplot_number, img_idx in enumerate(img_indices):
     plt.imshow(act_img, cmap = 'gray')
     plt.title("Actual image idx = {}".format(img_idx))
 
+plt.show()
+
 # clear GPU memory if training was done with GPU (never tried in Google Colab, maybe not necessary there)
 if len(tf.config.list_physical_devices('GPU')) > 0:
     cuda.select_device(0)
