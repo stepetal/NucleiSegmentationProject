@@ -1,2 +1,5 @@
 logs
 *.tmp
+/model_for_nuclei.h5
+/X_train.pickle
+/Y_train.pickle
