@@ -4,7 +4,8 @@ Segmentaion of nuclei with UNET
 
 Описание тренировки и использования нейросети для сегментации клеточных ядер
 1.	Тренировка нейросети
-1)	Тренировка при наличии средств вычислительной техники с GPU
+- Тренировка при наличии средств вычислительной техники с GPU
+При тренировке использовались:
 Windows 10, x64 
 GPU: Nvidia GeForce GTX 1050.
 Предполагается, что для видеокарты уже установлены драйвера.
@@ -16,13 +17,13 @@ conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
 python -m pip install "tensorflow<2.11"
 Убедиться, что GPU найдено, можно следующим образом:
 python -c "import tensorflow as tf; print('Number of GPUs Available: ', len(tf.config.list_physical_devices('GPU')))"
+При запуске тренировки GPU будет выбраться автоматически вместо CPU.  
+После тренировки нейросети возможно появление синего экрана с ошибкой nvlddmkm.sys system_thread_exception_not_handled (https://windows10i.ru/ustranenie-nepoladok/nvlddmkm-sys-sinij-ekran-windows-10.html). Если такое случилось, то можно попробовать откатить драйвер видеокарты (в диспетчере устройств зайти в свойства видеокарты, а потом откатить драйвер). Либо полностью переустановить драйвера на видеокарту (поставить более старой версии, например). Но для этого сначала нужно удалить текущую версию драйверов (включая драйвера на звук и PhysX) с помощью ПО display driver uninstaller
+https://www.guru3d.com/files-details/display-driver-uninstaller-download.html  
+*Примечание: после установки Anaconda следует вручную добавить пути в переменную path: C:\Anaconda3, C:\Anaconda3\Scripts, C:\Anaconda3\Library\bin. При условии, что Anaconda была установлена в каталог Anaconda3*
+- Тренировка при использовании Google Colab
+Для тренировки с использованием Google Colab следует скопировать файлы для тренировки на GoogleDrive. Далее подключить нужные библиотеки, скопировать содержимое скриптов в ячейки, выбрать GPU в настройках, запустить тренировку. Также можно указать использование tensorboard для визуализации процесса тренировки.
 
-При запуске тренировки GPU будет выбраться автоматически вместо CPU.
-
-После тренировки нейросети возможно появление синего экрана с ошибкой nvlddmkm.sys system_thread_exception_not_handled (https://windows10i.ru/ustranenie-nepoladok/nvlddmkm-sys-sinij-ekran-windows-10.html). Если такое случилось, то можно попробовать откатить драйвер видеокарты (в диспетчере устройств зайти в свойства видеокарты, а потом откатить драйвер). Либо полностью переустановить драйвера на видеокарту (поставить более старой версии, например). Но для этого сначала нужно удалить текущую версию драйверов (включая драйвера на звук и PhysX) с помощью ПО 
-display driver uninstaller
-https://www.guru3d.com/files-details/display-driver-uninstaller-download.html
-
-Примечание: после установки Anaconda следует вручную добавить пути в переменную path: C:\Anaconda3, C:\Anaconda3\Scripts, C:\Anaconda3\Library\bin. При условии, что Anaconda была установлена в каталог Anaconda3.
-
-
+2. Запуск скрипта для начала тренировки нейросети
+Для запуска нужно предварительно установить пакет openCV командой: pip install opencv-python. В данном случае pip - это команда, принадлежащая пакету Anaconda.
+После этого для запуска тренировки из каталога проекта следует выполнить команду: python train_and_test_unet_model.py
